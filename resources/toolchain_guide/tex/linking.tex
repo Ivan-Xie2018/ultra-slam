@@ -1,0 +1,23 @@
+\chapter{Linking}
+The process of linking take the object code produced by the assembler and turns it into executable code. Object code is machine code with \textit{relocatable} addressing. Relocatable means that the actual memory addresses of instructions or literals have not yet been defined. After all, the assembler has no clue where the flash memory on our STM32F051C6 device starts, so does not know where the code should be placed.
+
+Most (all?) of what we type in our assembly source code files goes into a \emph{segment} called \textit{text}. I'm not sure the history of how it got the name text, but it probably has something to do with how it contains instruction which are \textit{read} by the CPU (ie: the CPU reads and understand text). No matter the history of the name of this segment, the fact remains that we have to define where it must go it memory. If you look at the \texttt{main.lst} file produced by the assembler, you will see that all of the relative addresses are relative to the start of text. By defining where the text segment should start, we define all of the addresses, and hence produce an elf file where each byte has a defined destination address in the microcontroller memory.
+
+If you run the command below, it will print out all of the (very) many options which the linker can accept. 
+\begin{lstlisting}[style=BashStyle]
+$ arm-none-eabi-ld --help
+\end{lstlisting}
+
+Much like the assembler, the format for calling the linker is to specify options and then the input file name. The options which are of interest to us are:
+\begin{itemize}
+\item \texttt{-{}-verbose}: if we call the linker with this flag, it will print the entire default linker script which it uses to link the source file. Most of this is unnecessary for us to know about, but take a look at the 5th line of the script: you'll see \texttt{ENTRY(\_start)}. This is where the linker defines the entry point, and explains why we have to make the symbol \_start available to it.
+\item \texttt{-o \textit{<filename>}}: defines the output file name. Something like \texttt{main.elf} is generally a good file name.
+\item \texttt{-Ttext \textit{<address>}}: specifies the address where we want the \textit{text} segment to be placed. This should be at the start of flash.
+\end{itemize}
+
+As with the assembler, if the linker prints nothing to the terminal it exited happily. If it prints errors, read them carefully and try to correct them.
+
+With the above options in mind, a suggested command for linking is:
+\begin{lstlisting}[style=BashStyle]
+$ arm-none-eabi-ld -Ttext 0x08000000 -o main.elf main.o
+\end{lstlisting}

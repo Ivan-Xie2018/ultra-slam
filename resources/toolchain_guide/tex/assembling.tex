@@ -1,0 +1,67 @@
+\chapter{Assembling}
+A note on the word \textit{compiler:} A compiler is any piece of software which removes a level of abstraction in code. In other words: a compiler takes in high level code and produces low level code. Converting C code to assembly code is compiling. Converting assembly code to machine code is also compiling. The specific name for the compiler which converts assembly code to machine code is an \emph{assembler}. Hence: an assembler is a form of compiler, so we are allowed to use the words fairly interchangeably unless we need to be specific. \\
+Assembling is the process of taking human-readable assembly code and converting it into machine code instructions which the CPU can understand and carry out. 
+The program we will use for assembly is \texttt{arm-none-eabi-as}. 
+There are two things which we need to write in order for the assembler to run happily. The first is the source code file, typically called main.s. The second is the terminal command which launches the assembler.
+We will now deal with those individually.
+
+\section{Source Code File}
+There are two different sorts of lines of code which you will type: assembly instruction and compiler directives.
+
+\subsection{Instruction}
+The simplest to understand are the assembly instructions. These are instructions which we look up in the programming manual for the CPU, figure out the format we should write them in and then type them into the source file. The assembler then takes these instructions in our source file, interprets them and hence figures out what sequence of bits represent the instruction. 
+The machine code produced by the assembler is laid out in memory with each instruction coming sequentially after the next. 
+
+\subsection{Assembler Directives}
+These are also referred to as compiler directives. 
+
+Compiler directives are not CPU instructions. They are not converted to machine code, and they are not executed by the CPU. Rather, they are lines of code which tell the compiler to do something, or provide the compiler with information about how we want the output to be structured or formatted. 
+
+The general GCC assembler directives are documented at \url{https://sourceware.org/binutils/docs/as/Pseudo-Ops.html#Pseudo-Ops}. The ones which are interesting to us are:
+\begin{itemize}
+  \item \texttt{.global \textit{symbol}}: makes the symbol visible to the linker. A symbol is usually a label. The linker expects the symbol \textit{\_start} to be made available to it, as that's what it uses to define the program entry point.
+  \item \texttt{.word \textit{<word>}}: places whatever 32-bit word we type after it directly into memory. A word which is placed in memory like this is called a \emph{literal} - it is binary data which is not interpreted at all by the compiler.
+\end{itemize}
+
+The assembler directives specifically for ARM are documented \url{https://sourceware.org/binutils/docs/as/ARM-Directives.html#ARM-Directives}. The ones of interest to us are:
+\begin{itemize}
+  \item \texttt{.2byte} or \texttt{.4byte}: Similar to the .word directive, except now we have the option to place a full word (4 bytes) or half a word (2 bytes).
+  \item \texttt{.syntax \textit{<type>}}: Allows us to specify the type of assembly syntax. The default is the old \emph{divided} type where ARM and Thumb instructions have their own syntax. The new \emph{unified} type is what we will be using.
+  \item \texttt{.cpu \textit{<cpu type>}}: specifies which CPU we should be compiling for. The assembler knows which instructions are supported by which CPU, and hence can throw errors if we try to use instructions which do not exist for our CPU. The CPU we're compiling for is the \emph{cortex-m0}.
+  \item \texttt{.thumb}: specified that the our instructions should be compiled to the Thumb instruction set. This directive is probably not strictly necessary as we have already specified the CPU type which only supports the Thumb instruction set, but it's probably best to keep it for clarity. 
+\end{itemize}
+
+\subsection{Labels}
+Labels are one of the most useful abstractions provided by the assembler. They give you the ability to gave a name to the address of some data, and then refer to that address by name in future. The documentation of labels is \url{https://sourceware.org/binutils/docs/as/Labels.html#Labels}. One can label either instructions or literals. If we wanted to use PC-relative addressing without labels, we would have to manually calculate the difference between the memory address of the instruction trying to access data and the data being accessed, and supply that difference value as an operand to the data. This would mean that every time you changed the order of instructions or added new instructions to a program you'd have to re-calculate offsets. 
+
+It's important to note that the labels to not in any way make it into the microcontroller memory. They are only used to by the assembler to calculate offsets or to name memory addresses. When the code as been assembled, the labels have been replaced with actual numerical values. 
+
+\section{Command Line Arguments}
+The assembler is launched with the command
+\begin{lstlisting}[style=BashStyle]
+$ arm-none-eabi-as
+\end{lstlisting}
+After the command one is able to supply arguments to it. If you type \texttt{--help} as an argument, all possible arguments and formats are listed. You'll see from this that the general format is:
+\begin{lstlisting}[style=BashStyle]
+$ arm-none-eabi-as [option...] [asmfile...]
+\end{lstlisting}
+Where [asmfile] is the input file which must be assembled and [opttion...] is a list of options describing how the assembly must take place. The options which are interesting to us are:
+\begin{itemize}
+  \item \texttt{-o \textit{<filename>}}: specified the output filename. Something like main.o is generally good.
+  \item \texttt{-a=\textit{<filename>}}: this optional flag generates a listings file with the name \textit{<filename>}. The listings file is useful for debugging as is shows source code, machine code and addresses all in one. 
+  \item \texttt{-g}: this option seems poorly documented. As far as I can see it causes additional debugging info to be placed into the object files, which in turn makes its way into the elf file. This information is necessary for GDB to provide us with useful feedback on where our program is in execution. The option seems to be enabled by default on Windows, but is disabled by default on Linux. I suggest you include it in your command line argument, in case the defaults change. 
+  \item \texttt{-mcpu=\textit{<cpu type>}}: specifies the CPU which our instructions should be compiled for, just like the \texttt{.cpu} directive.
+  \item \texttt{-mthumb}: instructions the compiler to use the Thumb instruction set, just like the \texttt{.thumb} directive. 
+\end{itemize}
+The general options are documented here: \url{https://sourceware.org/binutils/docs/as/Invoking.html#Invoking}. The ARM specific options are documented here: \url{https://sourceware.org/binutils/docs/as/ARM-Options.html#ARM-Options}.
+
+The \texttt{-g}
+Note that the CPU type and instruction set (Thumb) can either be specified as a command line argument to arm-none-eabi-as or as an assembler directive in the source file. 
+
+When you run the assembler, it will provide no output if it assembles cleanly. If there are errors or warnings during assembly they will be printed to the terminal. Examine them closely and fix them.
+
+A suggested command for assembling is as follows, where \texttt{main.s} and \texttt{main.o} should be replaced with whatever source code file name you have and whatever object code file name you desire.
+\begin{lstlisting}[style=BashStyle]
+$ arm-none-eabi-as -g -a=main.lst -o main.o main.s
+\end{lstlisting}
+

@@ -1,0 +1,15 @@
+\chapter{Debugging}
+
+\section{GDB Commands}
+This section will deal with the commands which we can supply to GDB to gain insight into our program, and also manipulate it.
+
+\begin{enumerate}
+  \item \texttt{step}: runs a single line of code. Can be shortened to \texttt{s}.
+  \item \texttt{continue}: causes the debugger to releases control of the CPU and allows the CPU to execute the code freely. The debugger will regain control if the CPU hits a breakpoint, or if you press Ctrl+C. Can be shortened to \texttt{c}.
+  \item \texttt{monitor \textit{command}}: passes \textit{command} directly to openOCD. This allows non-GDB commands to be used. An example of this is the command \texttt{reset halt}. GDB has no concept of a reset, but openOCD does: it pulls the NRST line low for a few milliseconds. 
+  \item \texttt{info registers}: prints the names and values of all CPU registers. Can be shortened to \texttt{i r}.
+  \item \texttt{info registers rX}: where X is a number 0 - 15. Prints just the value of rX. Can be shortened to \texttt{i r rX}.
+  \item \texttt{set \$rX=\textit{val}}: where X is a register number 0 - 15 and \textit{val} is some numerical value. Sets the contents of RX to hold the value \textit{val}.
+  \item \texttt{x/\textit{format} \textit{address}}: reads the contents of \textit{address} and displays it according to \textit{format}. There are many format options. See the detailed documentation here: \url{https://sourceware.org/gdb/current/onlinedocs/gdb/Memory.html#Memory}. For example: \texttt{x/1xw 0x08000000} will display one word at the start of flash as a hex number.
+\end{enumerate}
+

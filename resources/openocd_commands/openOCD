@@ -1,0 +1,11 @@
+#open new terminal, start openOCD server 
+openocd -f board/stm32f0discovery.cfg
+
+#open new terminal, telnet into openOCD
+telnet localhost 4444
+
+#common commands
+halt
+flash erase_sector 0 0 last
+flash write_image {path/to/file.elf}
+reset

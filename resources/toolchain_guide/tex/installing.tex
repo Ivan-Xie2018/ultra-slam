@@ -1,0 +1,94 @@
+\chapter{Installing the Toolchain}
+Now that we have some idea of the software components which we need to install in order to build and debug code, let's install them.
+
+\section{Linux Install Guide}
+This section is written for Ubuntu. If you run a different distro, you may need to modify the commands slightly at best.
+\subsection{Text Editor}
+Either Vim or Gedit will be good enough for our needs. No need to install an additional editor.
+
+\subsection{gcc-arm-none-eabi}.
+The following assumes you can use PPAs. If your distro does not support PPAs you'll need to compile gcc-arm-none-eabi from source.
+Run the following commands to add the PPA to your system and install gcc-arm-none-eabi:
+\begin{lstlisting}[style=BashStyle]
+$ sudo apt-add-repository ppa:terry.guo/gcc-arm-embedded
+$ sudo apt-get update
+$ sudo apt-get install gcc-arm-none-eabi
+\end{lstlisting}
+You can check that the tools have been successfully installed, open a new terminal and run the following. 
+\begin{lstlisting}[style=BashStyle]
+$ arm-none-eabi-gdb --version
+$ arm-none-eabi-ld --version
+\end{lstlisting}
+Each command should give you some info about the tool if it's working properly. If you get something like \textit{Command not found} then it's not installed correctly.
+
+\subsection{OpenOCD}
+To get OpenOCD we will pull it from SourceForge, compile it and install it. First, the libusb-1.0 package must be installed.
+\begin{lstlisting}[style=BashStyle]
+$ sudo apt-get install pkg-config libusb-1.0*
+$ cd /tmp/
+$ wget http://downloads.sourceforge.net/project/\
+    openocd/openocd/0.8.0/openocd-0.8.0.tar.bz2
+$ tar xf ./openocd-0.8.0.tar.bz2 
+$ cd openocd-0.8.0
+$ ./configure --enable-stlink
+$ make # takes about 3 minutes
+$ sudo make install
+\end{lstlisting}
+To test that it's successfully installed, connect the micro to the computer and execute the following in a fresh terminal:
+\begin{lstlisting}[style=BashStyle]
+$ sudo openocd -f interface/stlink-v2.cfg -f target/stm32f0x_stlink.cfg
+\end{lstlisting}
+If you get a message about 4 breakpoints and 2 watchpoints, you're all good.
+
+\section{Windows}
+\subsection{Text Editor}
+While one could work in Notepad, it's not a great editor for real dev work. A much more popular one is Notepad++. Download and install Notepad++ (called npp.6.6.7.Installer.exe) from Vula. 
+Once the install is complete, download the syntax highlighting file (userDefineLang.xml) from Vula and paste it into to the Notepad++ directory: \\
+\verb;%APPDATA%\Notepad++;\\
+\verb+%APPDATA%+ is a special name which Windows understands. Simply type the above string into Explorer to be taken to the directory. 
+Once installed, run Notepad++ and disable spell checking by going to \verb+Plugins -> DSpellCheck -> Settings+. 
+Under File Types:
+\begin{itemize}
+\item change to \textit{Check only NOT those}
+\item replace   *.*   with   *.s
+\end{itemize}
+The reason we do this is that the spell checker keeps underlining all of our assembly instructions because they are not English words. Annoying.
+
+\subsection{Driver}
+Download the correct driver for your version of Windows from Vula. Extract the .zip and install the contents of it either by executing the .exe for the Windows 7 driver .zip or by executing the stlink\_winusb\_install batch file for the Windows 8 .zip.
+You can now connect the micro to your computer. If the red LED on the debugger goes solid red then the driver is probably installed correctly. If it's flashing red then the driver's probably not installed properly. 
+
+\subsection{gcc-arm-none-eabi}
+Download the executable from Vula and run it. When the install is complete you will be presented with some tick boxes. Tick the one called \textit{Add path to environment variable} and leave the others as defaults. By adding it to the path you are able to execute the tools from any directory rather than having to have your terminal in a specific directory. 
+Close the terminal which appears and launch a fresh one. Check that the tools are accessible by running:
+\begin{lstlisting}[style=BashStyle]
+$ arm-none-eabi-gdb --version
+$ arm-none-eabi-ld --version
+\end{lstlisting}
+If some words about the GNU debugger and linker appear, it's working. 
+If it goes on about \textit{not recognised as an internal or external command} it's broken. Re-install gcc-arm-none and tick the path box.
+Close the terminal by typing \texttt{exit}.
+
+
+\subsection{OpenOCD}
+Download the OpenOCD zip from Vula. 
+
+Extract to somewhere logical like \verb+C:\Program Files\+. 
+
+Rename \verb+openocd-0.8.0\bin-x64\openocd-x64-0.8.0.exe+ to \verb+openocd.exe+
+
+Next, we want to add the OpenOCD path to the PATH environment variable so that we can run OpenOCD from any directory.
+
+Go to \verb+Control Panel -> System -> Advanced System Settings+. Under User Variables, click the Path variable and click Edit. You’ll see a list of paths (possibly only 1). Append your OpenOCD binary path to the end.
+Something like:
+\begin{verbatim}
+;C:\Program Files\openocd-0.8.0\bin-x64\
+\end{verbatim}
+Note: The semicolon separating the paths is critical Click OK a few times 
+
+To test that OpenOCD is accessible and working, connect your micro and run the following.
+\begin{lstlisting}[style=BashStyle]
+$ openocd.exe -f interface/stlink-v2.cfg -f target/stm32f0x_stlink.cfg
+\end{lstlisting}
+If you get a message about 4 breakpoints and 2 watchpoints, you're all good.
+

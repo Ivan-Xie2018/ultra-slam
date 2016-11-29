@@ -1,0 +1,50 @@
+\documentclass[a4paper]{scrreprt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage{afterpage}
+
+\lstdefinestyle{BashStyle}{
+  language=bash,
+  basicstyle=\small\ttfamily,
+  %numbers=left,
+  %numberstyle=\tiny,
+  %numbersep=3pt,
+  frame=tb,
+  columns=fullflexible,
+  %backgroundcolor=\color{yellow},
+  linewidth=0.9\linewidth,
+  xleftmargin=0.1\linewidth
+}
+
+\title{Building for the ARM Cortex-M0 with GNU tools}
+\author{James Gowans}
+
+\begin{document}
+
+\maketitle
+\section*{Licence}
+This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA.
+
+\section*{Preface}
+This guide is intended for a range of audiences from those who have never compiled code with GCC before, to those who are experienced with GNU and want to start writing code for ARM.
+This guide does not intend to teach you programming, only building and debugging. You should have some familiarity with C and assembly before attempting to develop code.
+
+\tableofcontents
+
+\newpage
+\include{./tex/introduction}
+\include{./tex/terminal}
+\include{./tex/installing}
+\include{./tex/loading}
+\include{./tex/assembling}
+\include{./tex/linking}
+\include{./tex/debugging}
+\include{./tex/c_debugging}
+
+\end{document}

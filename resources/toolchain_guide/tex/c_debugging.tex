@@ -1,0 +1,63 @@
+\chapter{C Debugging}
+\section{Querying Defined Variables}
+C has a concept of variables, which assembly does not. In assembly we debug by reading from or writing to arbitrary memory addresses or CPU registers.  In C, we need to be able to read/write to the memory addresses which the compiler has allocated for our variables. GDB makes this very easy to do. 
+
+This section deals with how we can check which variables are in scope. This is a quick way to get an overview of what variables exist and what values they have. 
+
+There are essentially three classes of variables which we need to have the ability to inspect: global variables, local variables and variables passed as arguments.
+
+\subsection{Global Variables}
+The following GDB command prints out all variables which are in scope but defined outside of the function. For our purposes this is essentially the same as global variables. The global variables are listed in the "All defined variables:". Some other symbols defined in the startup code or the linker script in the "Non-debugging symbols".
+
+\texttt{info variables}
+
+\subsection{Local Variables}
+There are variables which are defined inside the function. 
+They can be shown with the following command:
+
+\texttt{info locals}
+
+\subsection{Arguments}
+Arguments are values passed in as parameters when the function is called. They can be shown with:
+
+\texttt{info args}
+
+\section{Getting More Info On Or Modifying Variables}
+\subsection{Types}
+If you want to check what type a variables is, the following command will print out the type, where 'var' is some variable name.
+
+\texttt{whatis \textit{var}}
+
+\subsection{Dereferencing Pointers}
+Often you will have variables of type pointer and you may want to inspect the data which they are pointing to. 
+You could of course just query the value which the pointer holds with one of the above commands and then use the \texttt{x} command to get the contents of that memory address, but that's a cumbersome. 
+
+A more elegant way to do it would be with C-style language. Assuming you had a pointer \textit{foo\_ptr} and wanted to see what it was pointing to, you could use:
+
+\texttt{print *foo\_ptr}
+
+This is great as it's the same syntax as we'd use is C for dealing with pointers. Similarly, if you wanted to check the memory address of a variable, you could use the reference operator to get address of a variable:
+
+\texttt{print \&foo}
+
+If you just wanted to see the value of the variable you could of course do:
+
+\texttt{print foo}
+
+\subsection{Modifying Variables}
+There are occasions where you may want to alter the value of a variable
+
+\section{Flow Control}
+Much of the flow control which GDB offers in C is the same as in assembly. We can still step, break and continue.
+
+Additional flow control which C has is now discussed.
+
+\subsection{Next}
+If the line of code about to be run is a function call and you do a \texttt{step}, execution then continues inside the function. This is often called a 'step into' instruction. This is what you want to do if you want to see what's going on inside the function.  If, however, you are not interesting in the function you can 'step over' it with the \texttt{next} instruction. The function will still be executed, but you won't have to step through each line of it. It's equivalent to setting a breakpoint on the line after the function call and then allowing the code to free run.
+
+\subsection{Finish}
+Assuming you're in a function which returns at some point, GDB can be instructed to free run until that function returns with the \texttt{finish} command.
+
+This is very useful if you just want to check something in a function. After checking the thing you're then done with the function and want to skip over the rest of the code until the function returns. 
+
+

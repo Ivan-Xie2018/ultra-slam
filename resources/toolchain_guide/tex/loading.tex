@@ -1,0 +1,27 @@
+\chapter{Loading}
+Now that the tools are installed, we will load an executable onto the micro using OpenOCD and GDB. The executable to be used is a pre-compiled version of the demonstration code called \texttt{demo.elf} which should be downloaded from Vula.
+
+Kill any existing terminals and open a fresh one. Connect your micro and launch OpenOCD again as you did before. Again, ensure that you get the message about breakpoints and watchpoints. This means it's successfully connected to the micro.
+
+Leave that terminal running in the background and open another one. \texttt{cd} to whatever directory you downloaded the .elf file to. Run:
+\begin{lstlisting}[style=BashStyle]
+$ arm-none-eabi-gdb demo.elf
+(gdb) target remote localhost:3333
+(gdb) monitor reset halt
+(gdb) load
+(gdb) continue
+\end{lstlisting}
+After running \texttt{continue} your micro should start running and the words \texttt{You did it!} should appear on the LCD screen. If they don't you didn't manage to do it.
+
+The commands mean the following:
+\begin{itemize}
+\item \texttt{arm-none-eabi-gdb demo.elf}: This launches GDB and tells it that we want to use the demo.elf file for debugging. The file name which you specify must be in the terminal's working directory
+\item \texttt{target remote localhost:3333}: This tells GDB to connect to OpenOCD. Specifically, it says that the target which we want to debug is a remote target (as opposed to running the code on the computer) and that the target can be reached by connecting to port 3333 which is the port which OpenOCD listens for connections on.
+\item \texttt{monitor reset halt}: This causes the debugger to reset the target micro by pulling its NRST line low for a few milliseconds. When the line is released, the debugger prevents the target from running whatever code is already loaded onto it. Once it has been reset, the debugger can jump in and prepare the micro to have code loaded onto it.
+\item \texttt{load}: GDB pushes the machine code contained in the demo.elf file onto the target micro via OpenOCD and the debugger.
+\item \texttt{continue}: The target micro is instructed to start running the new code which is now on it.
+\end{itemize}
+
+You can stop the target from running with Ctrl+C. You can then quit GDB with the \texttt{quit} command. OpenOCD can be killed with Ctrl+C. Note that if you disconnect your dev board from the computer you will have to kill and relaunch OpenOCD to get it to reestablish comms with the debugger.
+
+If you're running Linux, you can launch gdb with the flag \texttt{--tui} placed before the demo.elf filename. This allows GDB to run in a split screen mode where the top half of your screen shows you the source code you are debugging and the bottom half allows command entry. This is one of the coolest things about GDB - check it out.
