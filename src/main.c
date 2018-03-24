@@ -239,12 +239,12 @@ void displayLCD(void)
 	lcd_string("Speed: ");
 	//lcd_string(intToString(getSpeed()));
 
-	char* string_to_print = "Hello";
-  	while (string_to_print[count] != 0) 
-	{
-    	lcd_put (string_to_print[count], TEXT);
-    	count++;
-	}
+	//char* string_to_print = "Hello";
+  	//while (string_to_print[count] != 0) 
+	//{
+    //	lcd_put (string_to_print[count], TEXT);
+    //	count++;
+	//}
 
 }
 

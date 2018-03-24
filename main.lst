@@ -16,7 +16,7 @@ SYMBOL TABLE:
 00000000 l    d  .debug_str	00000000 .debug_str
 00000000 l    d  .debug_loc	00000000 .debug_loc
 00000000 l    d  .debug_ranges	00000000 .debug_ranges
-00000000 l    df *ABS*	00000000 /tmp/cctLA6zn.o
+00000000 l    df *ABS*	00000000 /tmp/ccNLt4QV.o
 f108f85f l       *ABS*	00000000 BootRAM
 08001c34 l       .text	00000000 LoopCopyDataInit
 08001c2c l       .text	00000000 CopyDataInit
@@ -39,21 +39,8 @@ f108f85f l       *ABS*	00000000 BootRAM
 08001a14 l     F .text	00000020 delay
 08001a34 l     F .text	00000030 pulse_strobe
 08001a64 l     F .text	000000f8 lcd_put
-00000000 l    df *ABS*	00000000 /usr/local/gcc-arm-none-eabi-5_3-2016q1/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crti.o
-00000000 l    df *ABS*	00000000 /usr/local/gcc-arm-none-eabi-5_3-2016q1/bin/../lib/gcc/arm-none-eabi/5.3.1/armv6-m/crtn.o
-00000000 l    df *ABS*	00000000 
-00000000 l       *UND*	00000000 __fini_array_end
-00000000 l       *UND*	00000000 malloc
-00000000 l       *UND*	00000000 __bss_start__
-00000000 l       *UND*	00000000 __deregister_frame_info
-20000024 l       .bss	00000000 end
-00000000 l       *UND*	00000000 __bss_end__
-00000000 l       *UND*	00000000 __fini_array_start
-00000000 l       *UND*	00000000 __end__
-00000000 l       *UND*	00000000 __libc_fini
-00000000 l       *UND*	00000000 _Jv_RegisterClasses
-00000000 l       *UND*	00000000 __register_frame_info
-00000000 l       *UND*	00000000 free
+00000000 l    df *ABS*	00000000 /usr/lib/gcc/arm-none-eabi/5.4.1/armv6-m/crti.o
+00000000 l    df *ABS*	00000000 /usr/lib/gcc/arm-none-eabi/5.4.1/armv6-m/crtn.o
 08000a60 g     F .text	00000012 TIM_TimeBaseStructInit
 08000420 g     F .text	00000020 RCC_HSICmd
 08000dd8 g     F .text	00000014 TIM_ForcedOC2Config
@@ -196,7 +183,6 @@ f108f85f l       *ABS*	00000000 BootRAM
 08000f14 g     F .text	00000014 TIM_OC3PolarityConfig
 080014b0 g     F .text	00000000 .hidden __aeabi_uidiv
 08001c74  w    F .text	00000002 SVC_Handler
-00000000  w      *UND*	00000000 __init_array_end
 08001334 g     F .text	0000000a TIM_InternalClockConfig
 08000edc g     F .text	0000000c TIM_OC1PolarityConfig
 08000e70 g     F .text	00000014 TIM_OC2FastConfig
@@ -218,7 +204,6 @@ f108f85f l       *ABS*	00000000 BootRAM
 08000f04 g     F .text	00000010 TIM_OC2NPolarityConfig
 08000328 g     F .text	00000018 NVIC_SystemLPConfig
 08001c74  w    F .text	00000002 TS_IRQHandler
-00000000  w      *UND*	00000000 __preinit_array_end
 08000ea4 g     F .text	0000000c TIM_ClearOC1Ref
 08001c74  w    F .text	00000002 WWDG_IRQHandler
 0800082c g     F .text	0000001c RCC_APB1PeriphResetCmd
@@ -249,7 +234,6 @@ f108f85f l       *ABS*	00000000 BootRAM
 080012bc g     F .text	00000004 TIM_GenerateEvent
 20000014 g     O .bss	00000004 Capture
 080015c4  w    F .text	00000002 .hidden __aeabi_idiv0
-00000000  w      *UND*	00000000 __init_array_start
 08000b20 g     F .text	00000020 TIM_BDTRConfig
 08000610 g     F .text	00000018 RCC_I2CCLKConfig
 080005ac g     F .text	00000018 RCC_PCLKConfig
@@ -268,7 +252,6 @@ f108f85f l       *ABS*	00000000 BootRAM
 08000ae4 g     F .text	00000010 TIM_SelectOnePulseMode
 08001460 g     F .text	00000030 TIM_EncoderInterfaceConfig
 08000dbc g     F .text	00000004 TIM_SetCompare1
-00000000  w      *UND*	00000000 __preinit_array_start
 08000ef4 g     F .text	00000010 TIM_OC2PolarityConfig
 08000a9c g     F .text	00000018 TIM_UpdateDisableConfig
 08000260 g     F .text	0000000e GPIO_ReadInputDataBit
@@ -3151,32 +3134,12 @@ Disassembly of section .text:
 	//TIM1 clock enable 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
  8001610:	2080      	movs	r0, #128	; 0x80
-//====================================================================
-// INITIALISE FUNCTIONS
-//====================================================================
-
-void initTimer1(void)
 {
  8001612:	b5f0      	push	{r4, r5, r6, r7, lr}
-	TIM_ICInitTypeDef TIM_ICInitStructure;
-	GPIO_InitTypeDef GPIO_InitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-	//TIM1 clock enable 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
  8001614:	2101      	movs	r1, #1
-//====================================================================
-// INITIALISE FUNCTIONS
-//====================================================================
-
-void initTimer1(void)
 {
  8001616:	b087      	sub	sp, #28
-	TIM_ICInitTypeDef TIM_ICInitStructure;
-	GPIO_InitTypeDef GPIO_InitStructure;
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-	//TIM1 clock enable 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1, ENABLE);
  8001618:	0100      	lsls	r0, r0, #4
  800161a:	f7ff f8cf 	bl	80007bc <RCC_APB2PeriphClockCmd>
@@ -3197,70 +3160,27 @@ void initTimer1(void)
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
  800162a:	2590      	movs	r5, #144	; 0x90
-
-	//TIM1 channel 2 pin (PE.11) configuration 
-	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_9;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
  800162c:	2400      	movs	r4, #0
-	//GPIOA clock enable
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-
-	//TIM1 channel 2 pin (PE.11) configuration 
-	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_9;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
  800162e:	2602      	movs	r6, #2
-
-	//GPIOA clock enable
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-
-	//TIM1 channel 2 pin (PE.11) configuration 
 	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_9;
  8001630:	009b      	lsls	r3, r3, #2
  8001632:	9301      	str	r3, [sp, #4]
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
  8001634:	05ed      	lsls	r5, r5, #23
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-
-	//TIM1 channel 2 pin (PE.11) configuration 
-	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_9;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
  8001636:	3bfe      	subs	r3, #254	; 0xfe
-
-	//GPIOA clock enable
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-
-	//TIM1 channel 2 pin (PE.11) configuration 
 	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_9;
  8001638:	a901      	add	r1, sp, #4
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
  800163a:	3bff      	subs	r3, #255	; 0xff
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
  800163c:	0028      	movs	r0, r5
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-
-	//TIM1 channel 2 pin (PE.11) configuration 
-	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_9;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
  800163e:	714b      	strb	r3, [r1, #5]
-	//GPIOA clock enable
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
-
-	//TIM1 channel 2 pin (PE.11) configuration 
-	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_9;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
  8001640:	710e      	strb	r6, [r1, #4]
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
  8001642:	718c      	strb	r4, [r1, #6]
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
@@ -3287,63 +3207,31 @@ void initTimer1(void)
 	TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
 	TIM1->PSC |= 32;
  8001658:	2220      	movs	r2, #32
-	//   The external signal is connected to TIM1 CH2 pin (PA.09)
-	//   The Rising edge is used as active edge,
-	//  The TIM1 CCR2 is used to compute the frequency value
-	//------------------------------------------------------------ 
-
 	TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;
  800165a:	a903      	add	r1, sp, #12
-	TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_BothEdge;
-	TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
-	TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
 	TIM1->PSC |= 32;
  800165c:	4d0f      	ldr	r5, [pc, #60]	; (800169c <initTimer1+0x8c>)
-	//  The TIM1 CCR2 is used to compute the frequency value
-	//------------------------------------------------------------ 
-
-	TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;
-	TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_BothEdge;
 	TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
  800165e:	3e01      	subs	r6, #1
-	//   The external signal is connected to TIM1 CH2 pin (PA.09)
-	//   The Rising edge is used as active edge,
-	//  The TIM1 CCR2 is used to compute the frequency value
-	//------------------------------------------------------------ 
-
 	TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;
  8001660:	800f      	strh	r7, [r1, #0]
-	TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_BothEdge;
 	TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
  8001662:	808e      	strh	r6, [r1, #4]
 	TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
  8001664:	80cc      	strh	r4, [r1, #6]
-	//   The Rising edge is used as active edge,
-	//  The TIM1 CCR2 is used to compute the frequency value
-	//------------------------------------------------------------ 
-
-	TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;
 	TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_BothEdge;
  8001666:	804b      	strh	r3, [r1, #2]
-	TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
-	TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
 	TIM1->PSC |= 32;
  8001668:	8d2b      	ldrh	r3, [r5, #40]	; 0x28
 	TIM_ICInitStructure.TIM_ICFilter = 0x0;
 
 	TIM_ICInit(TIM1, &TIM_ICInitStructure);
  800166a:	0028      	movs	r0, r5
-
-	TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;
-	TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_BothEdge;
-	TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
-	TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
 	TIM1->PSC |= 32;
  800166c:	4313      	orrs	r3, r2
  800166e:	852b      	strh	r3, [r5, #40]	; 0x28
 	TIM_ICInitStructure.TIM_ICFilter = 0x0;
  8001670:	810c      	strh	r4, [r1, #8]
-
 	TIM_ICInit(TIM1, &TIM_ICInitStructure);
  8001672:	f7ff fc99 	bl	8000fa8 <TIM_ICInit>
 
@@ -3368,11 +3256,6 @@ void initTimer1(void)
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
  800168c:	4668      	mov	r0, sp
-
-	//Enable the CC2 Interrupt Request 
-	TIM_ITConfig(TIM1, TIM_IT_CC2, ENABLE);
-
-	//Enable the TIM1 global Interrupt 
 	NVIC_InitStructure.NVIC_IRQChannel = TIM1_CC_IRQn;
  800168e:	7013      	strb	r3, [r2, #0]
 	NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
@@ -3399,20 +3282,10 @@ void initTimer2(void)
 
 	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
  80016a8:	2001      	movs	r0, #1
-	NVIC_Init(&NVIC_InitStructure);
-}
-
-void initTimer2(void) 
-{
 	RCC->AHBENR |= RCC_AHBENR_GPIOBEN;
  80016aa:	430a      	orrs	r2, r1
 	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
  80016ac:	2180      	movs	r1, #128	; 0x80
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-}
-
-void initTimer2(void) 
 {
  80016ae:	b530      	push	{r4, r5, lr}
 	RCC->AHBENR |= RCC_AHBENR_GPIOBEN;
@@ -3422,40 +3295,23 @@ void initTimer2(void)
  80016b4:	0289      	lsls	r1, r1, #10
  80016b6:	430a      	orrs	r2, r1
  80016b8:	615a      	str	r2, [r3, #20]
-
 	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
  80016ba:	69da      	ldr	r2, [r3, #28]
 
 	GPIOA->MODER |= GPIO_MODER_MODER1_1;
  80016bc:	2108      	movs	r1, #8
-void initTimer2(void) 
-{
-	RCC->AHBENR |= RCC_AHBENR_GPIOBEN;
-	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
-
 	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
  80016be:	4302      	orrs	r2, r0
  80016c0:	61da      	str	r2, [r3, #28]
-
 	GPIOA->MODER |= GPIO_MODER_MODER1_1;
  80016c2:	2290      	movs	r2, #144	; 0x90
 	GPIOB->MODER |= GPIO_MODER_MODER10_1; // PB10 = AF
  80016c4:	2480      	movs	r4, #128	; 0x80
-	RCC->AHBENR |= RCC_AHBENR_GPIOBEN;
-	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
-
-	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
-
 	GPIOA->MODER |= GPIO_MODER_MODER1_1;
  80016c6:	05d2      	lsls	r2, r2, #23
  80016c8:	6813      	ldr	r3, [r2, #0]
 	GPIOB->MODER |= GPIO_MODER_MODER10_1; // PB10 = AF
  80016ca:	03a4      	lsls	r4, r4, #14
-	RCC->AHBENR |= RCC_AHBENR_GPIOBEN;
-	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
-
-	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
-
 	GPIOA->MODER |= GPIO_MODER_MODER1_1;
  80016cc:	430b      	orrs	r3, r1
  80016ce:	6013      	str	r3, [r2, #0]
@@ -3468,38 +3324,21 @@ void initTimer2(void)
 	// specify PWM mode: OCxM bits in CCMRx. We want mode 1
 	TIM2->CCMR2 |= (TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1); // PWM Mode 1
  80016d2:	2560      	movs	r5, #96	; 0x60
-	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
-
-	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
-
-	GPIOA->MODER |= GPIO_MODER_MODER1_1;
 	GPIOB->MODER |= GPIO_MODER_MODER10_1; // PB10 = AF
  80016d4:	6819      	ldr	r1, [r3, #0]
  80016d6:	4321      	orrs	r1, r4
 	GPIOB->MODER |= GPIO_MODER_MODER11_1; // PB11 = AF
  80016d8:	2480      	movs	r4, #128	; 0x80
-	RCC->AHBENR |= RCC_AHBENR_GPIOAEN;
-
-	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
-
-	GPIOA->MODER |= GPIO_MODER_MODER1_1;
 	GPIOB->MODER |= GPIO_MODER_MODER10_1; // PB10 = AF
  80016da:	6019      	str	r1, [r3, #0]
 	GPIOB->MODER |= GPIO_MODER_MODER11_1; // PB11 = AF
  80016dc:	6819      	ldr	r1, [r3, #0]
  80016de:	0424      	lsls	r4, r4, #16
  80016e0:	4321      	orrs	r1, r4
-
 	GPIOA->AFR[0] |= (2 << 4);
  80016e2:	2420      	movs	r4, #32
-
-	RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
-
-	GPIOA->MODER |= GPIO_MODER_MODER1_1;
-	GPIOB->MODER |= GPIO_MODER_MODER10_1; // PB10 = AF
 	GPIOB->MODER |= GPIO_MODER_MODER11_1; // PB11 = AF
  80016e4:	6019      	str	r1, [r3, #0]
-
 	GPIOA->AFR[0] |= (2 << 4);
  80016e6:	6a11      	ldr	r1, [r2, #32]
  80016e8:	4321      	orrs	r1, r4
@@ -3511,11 +3350,6 @@ void initTimer2(void)
  80016f2:	430a      	orrs	r2, r1
 	GPIOB->AFR[1] |= (2 << (4*(11 - 8))); // PB11_AF = AF2 (ie: map to TIM2_CH4)
  80016f4:	2180      	movs	r1, #128	; 0x80
-	GPIOA->MODER |= GPIO_MODER_MODER1_1;
-	GPIOB->MODER |= GPIO_MODER_MODER10_1; // PB10 = AF
-	GPIOB->MODER |= GPIO_MODER_MODER11_1; // PB11 = AF
-
-	GPIOA->AFR[0] |= (2 << 4);
 	GPIOB->AFR[1] |= (2 << (4*(10 - 8))); // PB10_AF = AF2 (ie: map to TIM2_CH3)
  80016f6:	625a      	str	r2, [r3, #36]	; 0x24
 	GPIOB->AFR[1] |= (2 << (4*(11 - 8))); // PB11_AF = AF2 (ie: map to TIM2_CH4)
@@ -3523,30 +3357,17 @@ void initTimer2(void)
  80016fa:	0189      	lsls	r1, r1, #6
  80016fc:	430a      	orrs	r2, r1
  80016fe:	625a      	str	r2, [r3, #36]	; 0x24
-
 	TIM2->ARR = 960000;  // f = 50Hz
  8001700:	2380      	movs	r3, #128	; 0x80
  8001702:	4a15      	ldr	r2, [pc, #84]	; (8001758 <initTimer2+0xb8>)
  8001704:	05db      	lsls	r3, r3, #23
  8001706:	62da      	str	r2, [r3, #44]	; 0x2c
-	// specify PWM mode: OCxM bits in CCMRx. We want mode 1
-	TIM2->CCMR2 |= (TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1); // PWM Mode 1
 	TIM2->CCMR2 |= (TIM_CCMR2_OC4M_2 | TIM_CCMR2_OC4M_1); // PWM Mode 1
  8001708:	22c0      	movs	r2, #192	; 0xc0
-	GPIOB->AFR[1] |= (2 << (4*(10 - 8))); // PB10_AF = AF2 (ie: map to TIM2_CH3)
-	GPIOB->AFR[1] |= (2 << (4*(11 - 8))); // PB11_AF = AF2 (ie: map to TIM2_CH4)
-
-	TIM2->ARR = 960000;  // f = 50Hz
-	// specify PWM mode: OCxM bits in CCMRx. We want mode 1
 	TIM2->CCMR2 |= (TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1); // PWM Mode 1
  800170a:	8b99      	ldrh	r1, [r3, #28]
 	TIM2->CCMR2 |= (TIM_CCMR2_OC4M_2 | TIM_CCMR2_OC4M_1); // PWM Mode 1
  800170c:	01d2      	lsls	r2, r2, #7
-	GPIOB->AFR[1] |= (2 << (4*(10 - 8))); // PB10_AF = AF2 (ie: map to TIM2_CH3)
-	GPIOB->AFR[1] |= (2 << (4*(11 - 8))); // PB11_AF = AF2 (ie: map to TIM2_CH4)
-
-	TIM2->ARR = 960000;  // f = 50Hz
-	// specify PWM mode: OCxM bits in CCMRx. We want mode 1
 	TIM2->CCMR2 |= (TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1); // PWM Mode 1
  800170e:	4329      	orrs	r1, r5
  8001710:	8399      	strh	r1, [r3, #28]
@@ -3567,16 +3388,9 @@ void initTimer2(void)
 	// enable the OC channels
 	TIM2->CCER |= TIM_CCER_CC3E;
  8001720:	2180      	movs	r1, #128	; 0x80
-	TIM2->ARR = 960000;  // f = 50Hz
-	// specify PWM mode: OCxM bits in CCMRx. We want mode 1
-	TIM2->CCMR2 |= (TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1); // PWM Mode 1
-	TIM2->CCMR2 |= (TIM_CCMR2_OC4M_2 | TIM_CCMR2_OC4M_1); // PWM Mode 1
-	TIM2->CCMR1 |= (TIM_CCMR1_OC2M_2 | TIM_CCMR1_OC2M_1); // PWM Mode 1
 	TIM2->CCMR2 |= (TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1); // PWM Mode 1
  8001722:	432a      	orrs	r2, r5
  8001724:	839a      	strh	r2, [r3, #28]
-
-	// set PWM percantages
 	TIM2->CCR2 = 0;
  8001726:	2200      	movs	r2, #0
  8001728:	639a      	str	r2, [r3, #56]	; 0x38
@@ -3584,19 +3398,12 @@ void initTimer2(void)
  800172a:	63da      	str	r2, [r3, #60]	; 0x3c
 	TIM2->CCR4 = 0;
  800172c:	641a      	str	r2, [r3, #64]	; 0x40
-
-	// enable the OC channels
 	TIM2->CCER |= TIM_CCER_CC3E;
  800172e:	8c1a      	ldrh	r2, [r3, #32]
  8001730:	0049      	lsls	r1, r1, #1
  8001732:	430a      	orrs	r2, r1
 	TIM2->CCER |= TIM_CCER_CC4E;
  8001734:	2180      	movs	r1, #128	; 0x80
-	TIM2->CCR2 = 0;
-	TIM2->CCR3 = 0;
-	TIM2->CCR4 = 0;
-
-	// enable the OC channels
 	TIM2->CCER |= TIM_CCER_CC3E;
  8001736:	841a      	strh	r2, [r3, #32]
 	TIM2->CCER |= TIM_CCER_CC4E;
@@ -3605,11 +3412,6 @@ void initTimer2(void)
  800173c:	4311      	orrs	r1, r2
 	TIM2->CCER |= TIM_CCER_CC2E;
  800173e:	2210      	movs	r2, #16
-	TIM2->CCR3 = 0;
-	TIM2->CCR4 = 0;
-
-	// enable the OC channels
-	TIM2->CCER |= TIM_CCER_CC3E;
 	TIM2->CCER |= TIM_CCER_CC4E;
  8001740:	8419      	strh	r1, [r3, #32]
 	TIM2->CCER |= TIM_CCER_CC2E;
@@ -3636,18 +3438,12 @@ void initTimer3(void)
 
 	RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
  800175e:	2002      	movs	r0, #2
-	TIM2->CR1 |= TIM_CR1_CEN; // counter enable
-}
-
-void initTimer3(void) 
-{
 	RCC->AHBENR |= RCC_AHBENR_GPIOBEN;
  8001760:	4b1c      	ldr	r3, [pc, #112]	; (80017d4 <initTimer3+0x78>)
  8001762:	02c9      	lsls	r1, r1, #11
  8001764:	695a      	ldr	r2, [r3, #20]
  8001766:	430a      	orrs	r2, r1
  8001768:	615a      	str	r2, [r3, #20]
-
 	RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
  800176a:	69d9      	ldr	r1, [r3, #28]
  800176c:	4301      	orrs	r1, r0
@@ -3656,11 +3452,6 @@ void initTimer3(void)
 	GPIOB->MODER |= GPIO_MODER_MODER0_1;
 	GPIOB->MODER |= GPIO_MODER_MODER1_1;
  8001770:	2108      	movs	r1, #8
-{
-	RCC->AHBENR |= RCC_AHBENR_GPIOBEN;
-
-	RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
-
 	GPIOB->MODER |= GPIO_MODER_MODER0_1;
  8001772:	4b19      	ldr	r3, [pc, #100]	; (80017d8 <initTimer3+0x7c>)
  8001774:	681a      	ldr	r2, [r3, #0]
@@ -3672,15 +3463,9 @@ void initTimer3(void)
 	GPIOB->AFR[0] |= (1 << 0);
 	GPIOB->AFR[0] |= (1 << 4);
  800177c:	300e      	adds	r0, #14
-	RCC->AHBENR |= RCC_AHBENR_GPIOBEN;
-
-	RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
-
-	GPIOB->MODER |= GPIO_MODER_MODER0_1;
 	GPIOB->MODER |= GPIO_MODER_MODER1_1;
  800177e:	430a      	orrs	r2, r1
  8001780:	601a      	str	r2, [r3, #0]
-
 	GPIOB->AFR[0] |= (1 << 0);
  8001782:	6a1a      	ldr	r2, [r3, #32]
  8001784:	3907      	subs	r1, #7
@@ -3703,26 +3488,14 @@ void initTimer3(void)
 	// specify PWM mode: OCxM bits in CCMRx. We want mode 1
 	TIM3->CCMR2 |= (TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1);
  800179c:	2060      	movs	r0, #96	; 0x60
-
-	GPIOB->AFR[0] |= (1 << 0);
-	GPIOB->AFR[0] |= (1 << 4);
-
-	TIM3->PSC |= 5000;
 	TIM3->ARR = 960;		// f = 10 Hz
  800179e:	0092      	lsls	r2, r2, #2
  80017a0:	62da      	str	r2, [r3, #44]	; 0x2c
-
-	// specify PWM mode: OCxM bits in CCMRx. We want mode 1
 	TIM3->CCMR2 |= (TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1);
  80017a2:	8b9a      	ldrh	r2, [r3, #28]
  80017a4:	4302      	orrs	r2, r0
 	TIM3->CCMR2 |= (TIM_CCMR2_OC4M_2 | TIM_CCMR2_OC4M_1);
  80017a6:	20c0      	movs	r0, #192	; 0xc0
-
-	TIM3->PSC |= 5000;
-	TIM3->ARR = 960;		// f = 10 Hz
-
-	// specify PWM mode: OCxM bits in CCMRx. We want mode 1
 	TIM3->CCMR2 |= (TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1);
  80017a8:	839a      	strh	r2, [r3, #28]
 	TIM3->CCMR2 |= (TIM_CCMR2_OC4M_2 | TIM_CCMR2_OC4M_1);
@@ -3739,28 +3512,16 @@ void initTimer3(void)
 	// enable the OC channels
 	TIM3->CCER |= TIM_CCER_CC3E;
  80017b4:	2080      	movs	r0, #128	; 0x80
-	// specify PWM mode: OCxM bits in CCMRx. We want mode 1
-	TIM3->CCMR2 |= (TIM_CCMR2_OC3M_2 | TIM_CCMR2_OC3M_1);
-	TIM3->CCMR2 |= (TIM_CCMR2_OC4M_2 | TIM_CCMR2_OC4M_1);
-
-	// set PWM percentages
 	TIM3->CCR3 = 1; // 104us - PB0 for ultra-sonic sensor
  80017b6:	63d9      	str	r1, [r3, #60]	; 0x3c
 	TIM3->CCR4 = 0; // center motor
  80017b8:	641a      	str	r2, [r3, #64]	; 0x40
-
-	// enable the OC channels
 	TIM3->CCER |= TIM_CCER_CC3E;
  80017ba:	8c1a      	ldrh	r2, [r3, #32]
  80017bc:	0040      	lsls	r0, r0, #1
  80017be:	4302      	orrs	r2, r0
 	TIM3->CCER |= TIM_CCER_CC4E;
  80017c0:	2080      	movs	r0, #128	; 0x80
-	// set PWM percentages
-	TIM3->CCR3 = 1; // 104us - PB0 for ultra-sonic sensor
-	TIM3->CCR4 = 0; // center motor
-
-	// enable the OC channels
 	TIM3->CCER |= TIM_CCER_CC3E;
  80017c2:	841a      	strh	r2, [r3, #32]
 	TIM3->CCER |= TIM_CCER_CC4E;
@@ -3848,15 +3609,8 @@ void delay(uint32_t value)
 
 	for (i = 0; i < value; i++)
  800183c:	2300      	movs	r3, #0
-//====================================================================
-// FUNCTIONS
-//====================================================================
-
-void delay(uint32_t value)
 {
  800183e:	b082      	sub	sp, #8
-    volatile uint32_t i, k;
-
 	for (i = 0; i < value; i++)
  8001840:	9300      	str	r3, [sp, #0]
  8001842:	9a00      	ldr	r2, [sp, #0]
@@ -3871,17 +3625,11 @@ void delay(uint32_t value)
  8001852:	3201      	adds	r2, #1
  8001854:	9201      	str	r2, [sp, #4]
  8001856:	e7f8      	b.n	800184a <delay+0xe>
-
-void delay(uint32_t value)
-{
-    volatile uint32_t i, k;
-
 	for (i = 0; i < value; i++)
  8001858:	9a00      	ldr	r2, [sp, #0]
  800185a:	3201      	adds	r2, #1
  800185c:	9200      	str	r2, [sp, #0]
  800185e:	e7f0      	b.n	8001842 <delay+0x6>
-		{for (k = 0; k < value; k++);}
 }
  8001860:	b002      	add	sp, #8
  8001862:	4770      	bx	lr
@@ -3907,7 +3655,11 @@ void displayLCD(void)
 	lcd_string("Speed: ");
  800187e:	4804      	ldr	r0, [pc, #16]	; (8001890 <displayLCD+0x2c>)
  8001880:	f000 f96c 	bl	8001b5c <lcd_string>
-	//lcd_string(intToString(getSpeed()));
+	//{
+    //	lcd_put (string_to_print[count], TEXT);
+    //	count++;
+	//}
+
 }
  8001884:	bd10      	pop	{r4, pc}
  8001886:	46c0      	nop			; (mov r8, r8)
@@ -3916,14 +3668,8 @@ void displayLCD(void)
  8001890:	08001c85 	.word	0x08001c85
 
 08001894 <main>:
-//====================================================================
-// MAIN FUNCTION
-//====================================================================
-
-int main(void)
 {
  8001894:	b510      	push	{r4, lr}
-	//initialization Functions
 	initButtons();
  8001896:	f7ff ffa5 	bl	80017e4 <initButtons>
 	lcd_init();
@@ -3934,28 +3680,14 @@ int main(void)
  80018a2:	f7ff fefd 	bl	80016a0 <initTimer2>
 	initTimer3();
  80018a6:	f7ff ff59 	bl	800175c <initTimer3>
-
-	while(1)
-	{
 		displayLCD();
  80018aa:	f7ff ffdb 	bl	8001864 <displayLCD>
-		prevDistance = distanceReading;
 		delay(500);
  80018ae:	20fa      	movs	r0, #250	; 0xfa
-	initTimer3();
-
-	while(1)
-	{
-		displayLCD();
 		prevDistance = distanceReading;
  80018b0:	4b03      	ldr	r3, [pc, #12]	; (80018c0 <main+0x2c>)
 		delay(500);
  80018b2:	0040      	lsls	r0, r0, #1
-	initTimer3();
-
-	while(1)
-	{
-		displayLCD();
 		prevDistance = distanceReading;
  80018b4:	681a      	ldr	r2, [r3, #0]
  80018b6:	4b03      	ldr	r3, [pc, #12]	; (80018c4 <main+0x30>)
@@ -3978,8 +3710,8 @@ void TIM1_CC_IRQHandler(void)
  80018ca:	2104      	movs	r1, #4
  80018cc:	481c      	ldr	r0, [pc, #112]	; (8001940 <TIM1_CC_IRQHandler+0x78>)
  80018ce:	f7ff fd03 	bl	80012d8 <TIM_GetITStatus>
- 80018d2:	1e06      	subs	r6, r0, #0
- 80018d4:	2e01      	cmp	r6, #1
+ 80018d2:	0006      	movs	r6, r0
+ 80018d4:	2801      	cmp	r0, #1
  80018d6:	d132      	bne.n	800193e <TIM1_CC_IRQHandler+0x76>
   {
     //Clear TIM1 Capture compare interrupt pending bit 
@@ -4001,15 +3733,9 @@ void TIM1_CC_IRQHandler(void)
  80018f0:	4b15      	ldr	r3, [pc, #84]	; (8001948 <TIM1_CC_IRQHandler+0x80>)
       CaptureNumber = 1;
  80018f2:	802e      	strh	r6, [r5, #0]
-    //Clear TIM1 Capture compare interrupt pending bit 
-    TIM_ClearITPendingBit(TIM1, TIM_IT_CC2);
-    if(CaptureNumber == 0)
-    {
-      //Get the Input Capture value 
       IC3ReadValue1 = TIM_GetCapture2(TIM1);
  80018f4:	8018      	strh	r0, [r3, #0]
  80018f6:	e022      	b.n	800193e <TIM1_CC_IRQHandler+0x76>
-      CaptureNumber = 1;
     }
     else if(CaptureNumber == 1)
  80018f8:	2b01      	cmp	r3, #1
@@ -4095,46 +3821,31 @@ void SystemInit (void)
   /* Reset PREDIV1[3:0] bits */
   RCC->CFGR2 &= (uint32_t)0xFFFFFFF0;
  8001960:	240f      	movs	r4, #15
-  * @retval None
-  */
-void SystemInit (void)
-{    
-  /* Set HSION bit */
   RCC->CR |= (uint32_t)0x00000001;
  8001962:	4b25      	ldr	r3, [pc, #148]	; (80019f8 <SystemInit+0x9c>)
  8001964:	681a      	ldr	r2, [r3, #0]
  8001966:	4302      	orrs	r2, r0
  8001968:	601a      	str	r2, [r3, #0]
-
-  /* Reset SW[1:0], HPRE[3:0], PPRE[2:0], ADCPRE and MCOSEL[2:0] bits */
   RCC->CFGR &= (uint32_t)0xF8FFB80C;
  800196a:	6859      	ldr	r1, [r3, #4]
  800196c:	4a23      	ldr	r2, [pc, #140]	; (80019fc <SystemInit+0xa0>)
  800196e:	400a      	ands	r2, r1
  8001970:	605a      	str	r2, [r3, #4]
-  
-  /* Reset HSEON, CSSON and PLLON bits */
   RCC->CR &= (uint32_t)0xFEF6FFFF;
  8001972:	6819      	ldr	r1, [r3, #0]
  8001974:	4a22      	ldr	r2, [pc, #136]	; (8001a00 <SystemInit+0xa4>)
  8001976:	400a      	ands	r2, r1
  8001978:	601a      	str	r2, [r3, #0]
-
-  /* Reset HSEBYP bit */
   RCC->CR &= (uint32_t)0xFFFBFFFF;
  800197a:	6819      	ldr	r1, [r3, #0]
  800197c:	4a21      	ldr	r2, [pc, #132]	; (8001a04 <SystemInit+0xa8>)
  800197e:	400a      	ands	r2, r1
  8001980:	601a      	str	r2, [r3, #0]
-
-  /* Reset PLLSRC, PLLXTPRE and PLLMUL[3:0] bits */
   RCC->CFGR &= (uint32_t)0xFFC0FFFF;
  8001982:	6859      	ldr	r1, [r3, #4]
  8001984:	4a20      	ldr	r2, [pc, #128]	; (8001a08 <SystemInit+0xac>)
  8001986:	4011      	ands	r1, r2
  8001988:	6059      	str	r1, [r3, #4]
-
-  /* Reset PREDIV1[3:0] bits */
   RCC->CFGR2 &= (uint32_t)0xFFFFFFF0;
  800198a:	6ad9      	ldr	r1, [r3, #44]	; 0x2c
  800198c:	43a1      	bics	r1, r4
@@ -4191,11 +3902,6 @@ static void SetSysClock(void)
  80019b6:	400a      	ands	r2, r1
   RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSI_Div2 | RCC_CFGR_PLLXTPRE_PREDIV1 | RCC_CFGR_PLLMULL12);
  80019b8:	21a0      	movs	r1, #160	; 0xa0
-      
-  /* PCLK = HCLK */
-  RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE_DIV1;
-
-  /* PLL configuration = (HSI/2) * 12 = ~48 MHz */
   RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL));
  80019ba:	605a      	str	r2, [r3, #4]
   RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSI_Div2 | RCC_CFGR_PLLXTPRE_PREDIV1 | RCC_CFGR_PLLMULL12);
@@ -4206,15 +3912,8 @@ static void SetSysClock(void)
   /* Enable PLL */
   RCC->CR |= RCC_CR_PLLON;
  80019c2:	2180      	movs	r1, #128	; 0x80
-  /* PCLK = HCLK */
-  RCC->CFGR |= (uint32_t)RCC_CFGR_PPRE_DIV1;
-
-  /* PLL configuration = (HSI/2) * 12 = ~48 MHz */
-  RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL));
   RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSI_Div2 | RCC_CFGR_PLLXTPRE_PREDIV1 | RCC_CFGR_PLLMULL12);
  80019c4:	605a      	str	r2, [r3, #4]
-            
-  /* Enable PLL */
   RCC->CR |= RCC_CR_PLLON;
  80019c6:	681a      	ldr	r2, [r3, #0]
  80019c8:	0449      	lsls	r1, r1, #17
@@ -4223,15 +3922,8 @@ static void SetSysClock(void)
   /* Wait till PLL is ready */
   while((RCC->CR & RCC_CR_PLLRDY) == 0)
  80019cc:	2180      	movs	r1, #128	; 0x80
-  /* PLL configuration = (HSI/2) * 12 = ~48 MHz */
-  RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_PLLSRC | RCC_CFGR_PLLXTPRE | RCC_CFGR_PLLMULL));
-  RCC->CFGR |= (uint32_t)(RCC_CFGR_PLLSRC_HSI_Div2 | RCC_CFGR_PLLXTPRE_PREDIV1 | RCC_CFGR_PLLMULL12);
-            
-  /* Enable PLL */
   RCC->CR |= RCC_CR_PLLON;
  80019ce:	601a      	str	r2, [r3, #0]
-
-  /* Wait till PLL is ready */
   while((RCC->CR & RCC_CR_PLLRDY) == 0)
  80019d0:	0489      	lsls	r1, r1, #18
  80019d2:	6818      	ldr	r0, [r3, #0]
@@ -4260,11 +3952,6 @@ static void SetSysClock(void)
  80019ee:	400a      	ands	r2, r1
  80019f0:	2a08      	cmp	r2, #8
  80019f2:	d1fb      	bne.n	80019ec <SystemInit+0x90>
-  /* Disable all interrupts */
-  RCC->CIR = 0x00000000;
-
-  /* Configure the System clock frequency, AHB/APBx prescalers and Flash settings */
-  SetSysClock();
 }
  80019f4:	bd13      	pop	{r0, r1, r4, pc}
  80019f6:	46c0      	nop			; (mov r8, r8)
@@ -4284,14 +3971,8 @@ static void delay(uint32_t microseconds)
 	/* Hangs for specified number of microseconds. */
 	volatile uint32_t counter = 0;
  8001a14:	2300      	movs	r3, #0
-
-//============================================================================
-
-
-static void delay(uint32_t microseconds) 
 {
  8001a16:	b082      	sub	sp, #8
-	/* Hangs for specified number of microseconds. */
 	volatile uint32_t counter = 0;
  8001a18:	9301      	str	r3, [sp, #4]
 	microseconds *= 3;
@@ -4307,19 +3988,11 @@ static void delay(uint32_t microseconds)
  8001a24:	46c0      	nop			; (mov r8, r8)
 		__asm("nop");
  8001a26:	46c0      	nop			; (mov r8, r8)
-{
-	/* Hangs for specified number of microseconds. */
-	volatile uint32_t counter = 0;
-	microseconds *= 3;
-
 	for(; counter<microseconds; counter++) 
  8001a28:	9b01      	ldr	r3, [sp, #4]
  8001a2a:	3301      	adds	r3, #1
  8001a2c:	9301      	str	r3, [sp, #4]
  8001a2e:	e7f6      	b.n	8001a1e <delay+0xa>
-	{
-		__asm("nop");
-		__asm("nop");
 	}
 }
  8001a30:	b002      	add	sp, #8
@@ -4341,11 +4014,6 @@ static void pulse_strobe (void)
  8001a42:	69a3      	ldr	r3, [r4, #24]
 	delay (20);
  8001a44:	2014      	movs	r0, #20
-
-static void pulse_strobe (void) 
-{
-	//Pulse the strobe line of the LCD to indicate that data is ready.
-	delay (20);
 	GPIOC->BSRR |= GPIO_BSRR_BR_15;// pull E (PC15) low
  8001a46:	4313      	orrs	r3, r2
  8001a48:	61a3      	str	r3, [r4, #24]
@@ -4365,18 +4033,9 @@ static void pulse_strobe (void)
  8001a60:	48000800 	.word	0x48000800
 
 08001a64 <lcd_put>:
-}
-
-//============================================================================
-
-static void lcd_put (char character, enum TypeOfCharacter ch_type) 
 {
  8001a64:	b570      	push	{r4, r5, r6, lr}
  8001a66:	0005      	movs	r5, r0
-  //Puts a single character on the LCD at the next position on the screen.
-  //The character to be printed is in the input parameter. For numbers, letters 
-  //and other common characters the ASCII code will produce correct display.
-  //Refer to the Hitachi HD44780 datasheet for full character set information.
   if (ch_type == TEXT) {
  8001a68:	2901      	cmp	r1, #1
  8001a6a:	d104      	bne.n	8001a76 <lcd_put+0x12>
@@ -4397,8 +4056,6 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001a82:	430b      	orrs	r3, r1
  8001a84:	6193      	str	r3, [r2, #24]
  8001a86:	2390      	movs	r3, #144	; 0x90
-  }
-  // upper nibble to data lines
   if ((character & 0x80) != 0) {
  8001a88:	b26a      	sxtb	r2, r5
  8001a8a:	05db      	lsls	r3, r3, #23
@@ -4409,7 +4066,6 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001a92:	699a      	ldr	r2, [r3, #24]
  8001a94:	0209      	lsls	r1, r1, #8
  8001a96:	e002      	b.n	8001a9e <lcd_put+0x3a>
-  } else {
     GPIOA->BSRR |= GPIO_BSRR_BR_15;
  8001a98:	2180      	movs	r1, #128	; 0x80
  8001a9a:	699a      	ldr	r2, [r3, #24]
@@ -4418,7 +4074,6 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001aa0:	619a      	str	r2, [r3, #24]
  8001aa2:	2390      	movs	r3, #144	; 0x90
  8001aa4:	05db      	lsls	r3, r3, #23
-  }
   if ((character & 0x40) != 0) {
  8001aa6:	066a      	lsls	r2, r5, #25
  8001aa8:	d503      	bpl.n	8001ab2 <lcd_put+0x4e>
@@ -4427,7 +4082,6 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001aac:	699a      	ldr	r2, [r3, #24]
  8001aae:	0149      	lsls	r1, r1, #5
  8001ab0:	e002      	b.n	8001ab8 <lcd_put+0x54>
-  } else {
     GPIOA->BSRR |= GPIO_BSRR_BR_12;
  8001ab2:	2180      	movs	r1, #128	; 0x80
  8001ab4:	699a      	ldr	r2, [r3, #24]
@@ -4435,7 +4089,6 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001ab8:	430a      	orrs	r2, r1
  8001aba:	619a      	str	r2, [r3, #24]
  8001abc:	4c26      	ldr	r4, [pc, #152]	; (8001b58 <lcd_put+0xf4>)
-  }
   if ((character & 0x20) != 0) {
  8001abe:	06ab      	lsls	r3, r5, #26
  8001ac0:	d503      	bpl.n	8001aca <lcd_put+0x66>
@@ -4444,14 +4097,12 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001ac4:	69a3      	ldr	r3, [r4, #24]
  8001ac6:	0092      	lsls	r2, r2, #2
  8001ac8:	e002      	b.n	8001ad0 <lcd_put+0x6c>
-  } else {
     GPIOB->BSRR |= GPIO_BSRR_BR_9;
  8001aca:	2280      	movs	r2, #128	; 0x80
  8001acc:	69a3      	ldr	r3, [r4, #24]
  8001ace:	0492      	lsls	r2, r2, #18
  8001ad0:	4313      	orrs	r3, r2
  8001ad2:	61a3      	str	r3, [r4, #24]
-  } 
   if ((character & 0x10) != 0) {
  8001ad4:	06eb      	lsls	r3, r5, #27
  8001ad6:	d503      	bpl.n	8001ae0 <lcd_put+0x7c>
@@ -4460,19 +4111,16 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001ada:	69a3      	ldr	r3, [r4, #24]
  8001adc:	0052      	lsls	r2, r2, #1
  8001ade:	e002      	b.n	8001ae6 <lcd_put+0x82>
-  } else {
     GPIOB->BSRR |= GPIO_BSRR_BR_8;
  8001ae0:	2280      	movs	r2, #128	; 0x80
  8001ae2:	69a3      	ldr	r3, [r4, #24]
  8001ae4:	0452      	lsls	r2, r2, #17
  8001ae6:	4313      	orrs	r3, r2
  8001ae8:	61a3      	str	r3, [r4, #24]
-  }
   pulse_strobe ();
  8001aea:	f7ff ffa3 	bl	8001a34 <pulse_strobe>
  8001aee:	2390      	movs	r3, #144	; 0x90
  8001af0:	05db      	lsls	r3, r3, #23
-  // lower nibble to data lines
   if ((character & 0x08) != 0) {
  8001af2:	072a      	lsls	r2, r5, #28
  8001af4:	d503      	bpl.n	8001afe <lcd_put+0x9a>
@@ -4481,7 +4129,6 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001af8:	699a      	ldr	r2, [r3, #24]
  8001afa:	0209      	lsls	r1, r1, #8
  8001afc:	e002      	b.n	8001b04 <lcd_put+0xa0>
-  } else {
     GPIOA->BSRR |= GPIO_BSRR_BR_15;
  8001afe:	2180      	movs	r1, #128	; 0x80
  8001b00:	699a      	ldr	r2, [r3, #24]
@@ -4490,7 +4137,6 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001b06:	619a      	str	r2, [r3, #24]
  8001b08:	2390      	movs	r3, #144	; 0x90
  8001b0a:	05db      	lsls	r3, r3, #23
-  }
   if ((character & 0x04) != 0) {
  8001b0c:	076a      	lsls	r2, r5, #29
  8001b0e:	d503      	bpl.n	8001b18 <lcd_put+0xb4>
@@ -4499,14 +4145,12 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001b12:	699a      	ldr	r2, [r3, #24]
  8001b14:	0149      	lsls	r1, r1, #5
  8001b16:	e002      	b.n	8001b1e <lcd_put+0xba>
-  } else {
     GPIOA->BSRR |= GPIO_BSRR_BR_12;
  8001b18:	2180      	movs	r1, #128	; 0x80
  8001b1a:	699a      	ldr	r2, [r3, #24]
  8001b1c:	0549      	lsls	r1, r1, #21
  8001b1e:	430a      	orrs	r2, r1
  8001b20:	619a      	str	r2, [r3, #24]
-  }
   if ((character & 0x02) != 0) {
  8001b22:	07ab      	lsls	r3, r5, #30
  8001b24:	d503      	bpl.n	8001b2e <lcd_put+0xca>
@@ -4515,14 +4159,12 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001b28:	69a3      	ldr	r3, [r4, #24]
  8001b2a:	0092      	lsls	r2, r2, #2
  8001b2c:	e002      	b.n	8001b34 <lcd_put+0xd0>
-  } else {
     GPIOB->BSRR |= GPIO_BSRR_BR_9;
  8001b2e:	2280      	movs	r2, #128	; 0x80
  8001b30:	69a3      	ldr	r3, [r4, #24]
  8001b32:	0492      	lsls	r2, r2, #18
  8001b34:	4313      	orrs	r3, r2
  8001b36:	61a3      	str	r3, [r4, #24]
-  } 
   if ((character & 0x01) != 0) {
  8001b38:	07eb      	lsls	r3, r5, #31
  8001b3a:	d503      	bpl.n	8001b44 <lcd_put+0xe0>
@@ -4531,14 +4173,12 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001b3e:	69a3      	ldr	r3, [r4, #24]
  8001b40:	0052      	lsls	r2, r2, #1
  8001b42:	e002      	b.n	8001b4a <lcd_put+0xe6>
-  } else {
     GPIOB->BSRR |= GPIO_BSRR_BR_8;
  8001b44:	2280      	movs	r2, #128	; 0x80
  8001b46:	69a3      	ldr	r3, [r4, #24]
  8001b48:	0452      	lsls	r2, r2, #17
  8001b4a:	4313      	orrs	r3, r2
  8001b4c:	61a3      	str	r3, [r4, #24]
-  }
   pulse_strobe ();
  8001b4e:	f7ff ff71 	bl	8001a34 <pulse_strobe>
 }
@@ -4547,41 +4187,25 @@ static void lcd_put (char character, enum TypeOfCharacter ch_type)
  8001b58:	48000400 	.word	0x48000400
 
 08001b5c <lcd_string>:
-static void lcd_put (char character, enum TypeOfCharacter ch_type);
-
-//============================================================================
-
-void lcd_string(char* string_to_print) 
 {
  8001b5c:	b510      	push	{r4, lr}
  8001b5e:	0004      	movs	r4, r0
  8001b60:	3401      	adds	r4, #1
-  	uint32_t count=0;
   	while (string_to_print[count] != 0) 
  8001b62:	1e63      	subs	r3, r4, #1
  8001b64:	7818      	ldrb	r0, [r3, #0]
  8001b66:	2800      	cmp	r0, #0
  8001b68:	d003      	beq.n	8001b72 <lcd_string+0x16>
-	{
     	lcd_put (string_to_print[count], TEXT);
  8001b6a:	2101      	movs	r1, #1
  8001b6c:	f7ff ff7a 	bl	8001a64 <lcd_put>
  8001b70:	e7f6      	b.n	8001b60 <lcd_string+0x4>
-    	count++;
-	}
 }
  8001b72:	bd10      	pop	{r4, pc}
 
 08001b74 <lcd_command>:
-}
-
-//============================================================================
-
-void lcd_command (enum LcdCommand command) 
 {
  8001b74:	b510      	push	{r4, lr}
-	//This function sends a command to the LCD. 
-	//Care is taken not to interfere with the other lines on the port.
 	lcd_put((char)command, COMMAND);
  8001b76:	2100      	movs	r1, #0
  8001b78:	f7ff ff74 	bl	8001a64 <lcd_put>
@@ -4593,43 +4217,22 @@ void lcd_command (enum LcdCommand command)
  8001b84:	00000bb8 	.word	0x00000bb8
 
 08001b88 <lcd_init>:
-}
-
-//============================================================================
-
-void lcd_init () 
 {
  8001b88:	b510      	push	{r4, lr}
-	/*This function sets up the port lines for the LCD and initializes
-	the LCD module for use.*/
-
 	delay(30000); //allow the LCD 30 ms power up time
  8001b8a:	4822      	ldr	r0, [pc, #136]	; (8001c14 <lcd_init+0x8c>)
  8001b8c:	f7ff ff42 	bl	8001a14 <delay>
-
-	// set the relevant pins to outputs
 	RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
  8001b90:	2180      	movs	r1, #128	; 0x80
  8001b92:	4b21      	ldr	r3, [pc, #132]	; (8001c18 <lcd_init+0x90>)
 	RCC->AHBENR |= RCC_AHBENR_GPIOBEN; 
  8001b94:	2480      	movs	r4, #128	; 0x80
-	the LCD module for use.*/
-
-	delay(30000); //allow the LCD 30 ms power up time
-
-	// set the relevant pins to outputs
 	RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
  8001b96:	695a      	ldr	r2, [r3, #20]
  8001b98:	0309      	lsls	r1, r1, #12
  8001b9a:	430a      	orrs	r2, r1
-	RCC->AHBENR |= RCC_AHBENR_GPIOBEN; 
 	RCC->AHBENR |= RCC_AHBENR_GPIOAEN; 
  8001b9c:	2180      	movs	r1, #128	; 0x80
-	the LCD module for use.*/
-
-	delay(30000); //allow the LCD 30 ms power up time
-
-	// set the relevant pins to outputs
 	RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
  8001b9e:	615a      	str	r2, [r3, #20]
 	RCC->AHBENR |= RCC_AHBENR_GPIOBEN; 
@@ -4645,11 +4248,6 @@ void lcd_init ()
  8001bae:	2180      	movs	r1, #128	; 0x80
 	GPIOC->MODER |= GPIO_MODER_MODER15_0;
  8001bb0:	2080      	movs	r0, #128	; 0x80
-	delay(30000); //allow the LCD 30 ms power up time
-
-	// set the relevant pins to outputs
-	RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
-	RCC->AHBENR |= RCC_AHBENR_GPIOBEN; 
 	RCC->AHBENR |= RCC_AHBENR_GPIOAEN; 
  8001bb2:	615a      	str	r2, [r3, #20]
 	GPIOC->MODER |= GPIO_MODER_MODER14_0;
@@ -4658,32 +4256,16 @@ void lcd_init ()
  8001bb8:	681a      	ldr	r2, [r3, #0]
 	GPIOC->MODER |= GPIO_MODER_MODER15_0;
  8001bba:	05c0      	lsls	r0, r0, #23
-
-	// set the relevant pins to outputs
-	RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
-	RCC->AHBENR |= RCC_AHBENR_GPIOBEN; 
-	RCC->AHBENR |= RCC_AHBENR_GPIOAEN; 
 	GPIOC->MODER |= GPIO_MODER_MODER14_0;
  8001bbc:	430a      	orrs	r2, r1
-	GPIOC->MODER |= GPIO_MODER_MODER15_0;
 	GPIOB->MODER |= GPIO_MODER_MODER8_0;
  8001bbe:	2180      	movs	r1, #128	; 0x80
-
-	// set the relevant pins to outputs
-	RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
-	RCC->AHBENR |= RCC_AHBENR_GPIOBEN; 
-	RCC->AHBENR |= RCC_AHBENR_GPIOAEN; 
 	GPIOC->MODER |= GPIO_MODER_MODER14_0;
  8001bc0:	601a      	str	r2, [r3, #0]
 	GPIOC->MODER |= GPIO_MODER_MODER15_0;
  8001bc2:	681a      	ldr	r2, [r3, #0]
 	GPIOB->MODER |= GPIO_MODER_MODER8_0;
  8001bc4:	0249      	lsls	r1, r1, #9
-	// set the relevant pins to outputs
-	RCC->AHBENR |= RCC_AHBENR_GPIOCEN;
-	RCC->AHBENR |= RCC_AHBENR_GPIOBEN; 
-	RCC->AHBENR |= RCC_AHBENR_GPIOAEN; 
-	GPIOC->MODER |= GPIO_MODER_MODER14_0;
 	GPIOC->MODER |= GPIO_MODER_MODER15_0;
  8001bc6:	4302      	orrs	r2, r0
  8001bc8:	601a      	str	r2, [r3, #0]
@@ -4696,11 +4278,6 @@ void lcd_init ()
  8001bd2:	6819      	ldr	r1, [r3, #0]
 	GPIOA->MODER |= GPIO_MODER_MODER12_0;
  8001bd4:	2280      	movs	r2, #128	; 0x80
-	RCC->AHBENR |= RCC_AHBENR_GPIOBEN; 
-	RCC->AHBENR |= RCC_AHBENR_GPIOAEN; 
-	GPIOC->MODER |= GPIO_MODER_MODER14_0;
-	GPIOC->MODER |= GPIO_MODER_MODER15_0;
-	GPIOB->MODER |= GPIO_MODER_MODER8_0;
 	GPIOB->MODER |= GPIO_MODER_MODER9_0;
  8001bd6:	4321      	orrs	r1, r4
  8001bd8:	6019      	str	r1, [r3, #0]
@@ -4715,7 +4292,6 @@ void lcd_init ()
  8001be6:	681a      	ldr	r2, [r3, #0]
  8001be8:	4302      	orrs	r2, r0
  8001bea:	601a      	str	r2, [r3, #0]
-
 	lcd_command(LCD_EIGHT_BIT_MODE);       		// 0x33
  8001bec:	2033      	movs	r0, #51	; 0x33
  8001bee:	f7ff ffc1 	bl	8001b74 <lcd_command>
@@ -4825,39 +4401,16 @@ LoopFillZerobss:
 LoopForever:
     b LoopForever
  8001c5a:	e7fe      	b.n	8001c5a <LoopForever>
-
-  .section .text.Reset_Handler
-  .weak Reset_Handler
-  .type Reset_Handler, %function
-Reset_Handler:
   ldr   r0, =_estack
  8001c5c:	20002000 	.word	0x20002000
-/* Copy the data segment initializers from flash to SRAM */
-  movs r1, #0
-  b LoopCopyDataInit
-
-CopyDataInit:
   ldr r3, =_sidata
  8001c60:	08001ca8 	.word	0x08001ca8
-  ldr r3, [r3, r1]
-  str r3, [r0, r1]
-  adds r1, r1, #4
-
-LoopCopyDataInit:
   ldr r0, =_sdata
  8001c64:	20000000 	.word	0x20000000
   ldr r3, =_edata
  8001c68:	20000010 	.word	0x20000010
-  adds r2, r0, r1
-  cmp r2, r3
-  bcc CopyDataInit
   ldr r2, =_sbss
  8001c6c:	20000010 	.word	0x20000010
-  str  r3, [r2]
-  adds r2, r2, #4
-
-
-LoopFillZerobss:
   ldr r3, = _ebss
  8001c70:	20000024 	.word	0x20000024
 
